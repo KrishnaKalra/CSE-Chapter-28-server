@@ -9,5 +9,5 @@ app.listen(port,()=>{
     console.log("Listenin to port "+port);
 })
 app.get('/',(req,res)=>{
-    res.send("Hi HELLO");
+    res.send("Under Work");
 });
