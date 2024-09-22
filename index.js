@@ -15,15 +15,24 @@ db.once('open',()=>{
 });
  
 const UserSchema=new mongoose.Schema({   
-_id:String,
+image:String,
 name:String,
 id:String,
 Location:String,
-Description:String
+Instagram:String,
+GitHub:String,
+LinkedIn:String,
+Description:String,
 });
 const User=mongoose.model("year2027",UserSchema);
 app.get('/api/2027',async (req,res)=>{
     let datadb= await (User.find({}));
+    console.log(datadb);
+    res.json(datadb);
+});
+app.get('/api/2027/id',async (req,res)=>{
+    const user_id=req.query.id;
+    let datadb= await (User.find({id:user_id}));
     console.log(datadb);
     res.json(datadb);
 });
@@ -33,3 +42,46 @@ app.listen(port,()=>{
 app.get('/',(req,res)=>{
     res.send("Under Work");
 });
+app.post('/api/2027/add',async (req,res)=>{
+    try{
+    const Formname=req.body.name;
+    const Formid=req.body.id;
+    console.log(req.body);
+    console.log(Formname);
+    console.log(Formid);
+
+    const newUser=new User({
+        name:Formname,
+        id:Formid
+    });
+    await newUser.save();
+    res.json('User added!');
+    }
+    catch(err){
+        console.error(err.message);
+    }
+});
+app.post('/api/2027/profile',async(req,res)=>{
+    try{
+    const fid=req.body.id;
+    const fimage=req.body.image;
+    const flocation=req.body.location;
+    const fdescription=req.body.description;
+    const fGitHub=req.body.github;
+    const fLinkedIn=req.body.linkedin;
+    const fInstagram=req.body.instagram;
+    console.log(req.body);
+    await User.findOneAndUpdate({id:fid},{
+        image:fimage,
+        Location:flocation,
+        Description:fdescription,
+        GitHub:fGitHub,
+        Instagram:fInstagram,
+        LinkedIn:fLinkedIn,
+    });
+    res.json("Updated"); 
+}
+catch(err){
+    console.error(err.message);
+}
+})
