@@ -44,9 +44,9 @@ app.get('/',(req,res)=>{
 });
 app.post('/api/2027/add',async (req,res)=>{
     try{
-    const Formname=req.body.name;
-    const Formid=req.body.id;
-    console.log(req.body);
+    const Formname=req.query.name;
+    const Formid=req.query.id;
+    console.log(req.query);
     console.log(Formname);
     console.log(Formid);
 
@@ -79,7 +79,7 @@ app.post('/api/2027/profile',async(req,res)=>{
         Instagram:fInstagram,
         LinkedIn:fLinkedIn,
     });
-    res.json("Updated"); 
+    res.status(200);
 }
 catch(err){
     console.error(err.message);
