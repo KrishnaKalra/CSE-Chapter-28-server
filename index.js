@@ -63,14 +63,14 @@ app.post('/api/2027/add',async (req,res)=>{
 });
 app.post('/api/2027/profile',async(req,res)=>{
     try{
-    const fid=req.body.id;
-    const fimage=req.body.image;
-    const flocation=req.body.location;
-    const fdescription=req.body.description;
-    const fGitHub=req.body.github;
-    const fLinkedIn=req.body.linkedin;
-    const fInstagram=req.body.instagram;
-    console.log(req.body);
+    const fid=req.query.id;
+    const fimage=req.query.image;
+    const flocation=req.query.location;
+    const fdescription=req.query.description;
+    const fGitHub=req.query.github;
+    const fLinkedIn=req.query.linkedin;
+    const fInstagram=req.query.instagram;
+    console.log(req.query);
     await User27.findOneAndUpdate({id:fid},{
         image:fimage,
         Location:flocation,
@@ -123,14 +123,14 @@ app.post('/api/2026/add',async (req,res)=>{
 });
 app.post('/api/2026/profile',async(req,res)=>{
     try{
-    const fid=req.body.id;
-    const fimage=req.body.image;
-    const flocation=req.body.location;
-    const fdescription=req.body.description;
-    const fGitHub=req.body.github;
-    const fLinkedIn=req.body.linkedin;
-    const fInstagram=req.body.instagram;
-    console.log(req.body);
+        const fid=req.query.id;
+        const fimage=req.query.image;
+        const flocation=req.query.location;
+        const fdescription=req.query.description;
+        const fGitHub=req.query.github;
+        const fLinkedIn=req.query.linkedin;
+        const fInstagram=req.query.instagram;
+        console.log(req.query);
     await User26.findOneAndUpdate({id:fid},{
         image:fimage,
         Location:flocation,
@@ -187,14 +187,14 @@ app.post('/api/2028/add',async (req,res)=>{
 });
 app.post('/api/2028/profile',async(req,res)=>{
     try{
-    const fid=req.body.id;
-    const fimage=req.body.image;
-    const flocation=req.body.location;
-    const fdescription=req.body.description;
-    const fGitHub=req.body.github;
-    const fLinkedIn=req.body.linkedin;
-    const fInstagram=req.body.instagram;
-    console.log(req.body);
+        const fid=req.query.id;
+        const fimage=req.query.image;
+        const flocation=req.query.location;
+        const fdescription=req.query.description;
+        const fGitHub=req.query.github;
+        const fLinkedIn=req.query.linkedin;
+        const fInstagram=req.query.instagram;
+        console.log(req.query);
     await User28.findOneAndUpdate({id:fid},{
         image:fimage,
         Location:flocation,
