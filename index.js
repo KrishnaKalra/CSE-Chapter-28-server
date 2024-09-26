@@ -5,7 +5,9 @@ import mongoose from "mongoose";
 const app=express();
 app.use(cors())
 app.use(express.static("public"));
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(express.json());
 const port=3000;
 const password='qe2D!nSmLqCnEPS';
 mongoose.connect('mongodb+srv://KrishnaKalra:'+password+'@cluster0.gynsm.mongodb.net/Batches');
