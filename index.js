@@ -4,7 +4,6 @@ import cors from 'cors';
 import mongoose from "mongoose";
 const app=express();
 app.use(cors({
-    origin: 'https://cse-chapter-28.vercel.app',
     methods: ['GET','POST','PUT','DELETE','OPTIONS'],
     allowedHeaders: ['Content-Type','Authorization']
 }));
