@@ -3,7 +3,11 @@ import bodyParser from "body-parser";
 import cors from 'cors';
 import mongoose from "mongoose";
 const app=express();
-app.use(cors())
+app.use(cors({
+    origin: 'https://cse-chapter-28.vercel.app',
+    methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+    allowedHeaders: ['Content-Type','Authorization']
+}));
 app.use(express.static("public"));
 app.use(bodyParser.json({limit: '150mb'}));
 app.use(bodyParser.urlencoded({limit: '150mb', extended: true,parameterLimit:50000}));
