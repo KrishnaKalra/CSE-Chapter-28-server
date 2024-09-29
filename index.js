@@ -3,7 +3,8 @@ import bodyParser from "body-parser";
 import cors from 'cors';
 import mongoose from "mongoose";
 import { uploadOnCloudinary } from "./utils/cloudinary.js";
-import { upload } from "./middleware/multer.middleware.js";
+import {upload } from "./middleware/multer.middleware.js";
+import getDataUri from "./utils/dataUri.js";
 const app=express();
 app.use(cors({
     methods: ['GET','POST','PUT','DELETE','OPTIONS'],
@@ -73,12 +74,14 @@ app.post('/api/2027/add',async (req,res)=>{
         console.error(err.message);
     }
 });
-app.post('/api/2027/profile',upload.single("images"),async(req,res)=>{
+app.post('/api/2027/profile',upload.single('images'),async(req,res)=>{
     try{
         let result;
-        if(req.file)
-        result= await uploadOnCloudinary(req.file.path,req.body.id);
-        //console.log(result.url);
+        if(req.file){
+            const fileUri=getDataUri(req.file);
+            result= await uploadOnCloudinary(fileUri,req.body.id);
+        }
+        console.log(result);
         let NewObject={
             Location:req.body.location,
             Description:req.body.description,
@@ -118,11 +121,13 @@ app.get('/api/2026/id',async (req,res)=>{
         console.error(err);
     }
 });
-app.post('/api/2026/profile',async(req,res)=>{
+app.post('/api/2026/profile',upload.single('images'),async(req,res)=>{
     try{
         let result;
-        if(req.file)
-        result= await uploadOnCloudinary(req.file.path);
+        if(req.file){
+        const fileUri=getDataUri(req.file);
+        result= await uploadOnCloudinary(fileUri,req.body.id);
+        }
         //console.log(result.url);
         let NewObject={
             Location:req.body.location,
@@ -187,11 +192,11 @@ app.post('/api/2028/add',async (req,res)=>{
         console.error(err.message);
     }
 });
-app.post('/api/2028/profile',async(req,res)=>{
+app.post('/api/2028/profile',upload.single('images'),async(req,res)=>{
     try{
         let result;
-        if(req.file)
-        result= await uploadOnCloudinary(req.file.path);
+        if(req.file){const fileUri=getDataUri(req.file);
+            result= await uploadOnCloudinary(fileUri,req.body.id);}
         //console.log(result.url);
         let NewObject={
             Location:req.body.location,

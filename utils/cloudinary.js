@@ -9,16 +9,17 @@ env.config();
         api_secret:process.env.CLOUDINARY_API_SECRET// Click 'View API Keys' above to copy your API secret
     });
     
-    const uploadOnCloudinary=async (localFilePath,id)=>{
+    const uploadOnCloudinary=async (file,id)=>{
         try{
-            if(!localFilePath)
+            if(!file)
                 return null;
             console.log('check');
-            const response=await cloudinary.uploader.upload(localFilePath,{
+            const response=await cloudinary.uploader.upload(file.content,{
                 public_id:id,
                 resource_type:"auto"
             })
-            console.log("File is uploaded on cloudinary "+response.url);
+            console.log(response);
+            //console.log("File is uploaded on cloudinary "+response.url);
             return response;
 
         }
