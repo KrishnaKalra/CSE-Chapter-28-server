@@ -110,6 +110,25 @@ app.get('/api/2026',async (req,res)=>{
     let datadb= await (User26.find({}).sort({id:1}));
     return res.json(datadb);
 });
+app.post('/api/2026/add',async (req,res)=>{
+    try{
+    const Formname=req.query.name;
+    const Formid=req.query.id;
+    console.log(req.query);
+    console.log(Formname);
+    console.log(Formid);
+
+    const newUser=new User26({
+        name:Formname,
+        id:Formid
+    });
+    await newUser.save();
+    res.json('User added!');
+    }
+    catch(err){
+        console.error(err.message);
+    }
+});
 app.get('/api/2026/id',async (req,res)=>{
     try{
         const user_id=req.query.id;
