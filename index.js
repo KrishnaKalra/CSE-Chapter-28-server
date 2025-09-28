@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 import { uploadOnCloudinary } from "./utils/cloudinary.js";
 import {upload } from "./middleware/multer.middleware.js";
 import getDataUri from "./utils/dataUri.js";
+import env from 'dotenv';
+
 const app=express();
 app.use(cors({
     methods: ['GET','POST','PUT','DELETE','OPTIONS'],
