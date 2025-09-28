@@ -238,3 +238,63 @@ catch(err){
     console.error(err.message);
 }
 })
+
+
+
+
+
+const User29 = mongoose.model("year2029", UserSchema);
+
+
+app.get('/api/2029', async (req, res) => {
+  let datadb = await User29.find({}).sort({id:1});
+  return res.json(datadb);
+});
+
+
+app.get('/api/2029/id', async (req, res) => {
+  try {
+    const user_id = req.query.id;
+    let datadb = await User29.find({id:user_id});
+    res.json(datadb);
+  } catch(err) {
+    console.error(err);
+  }
+});
+
+
+app.post('/api/2029/add', async (req, res) => {
+  try {
+    const Formname = req.query.name;
+    const Formid = req.query.id;
+    const newUser = new User29({ name:Formname, id:Formid });
+    await newUser.save();
+    res.json('User added!');
+  } catch(err) {
+    console.error(err.message);
+  }
+});
+
+
+app.post('/api/2029/profile', upload.single('images'), async (req,res)=>{
+  try {
+    let result;
+    if(req.file){
+      const fileUri = getDataUri(req.file);
+      result = await uploadOnCloudinary(fileUri, req.body.id);
+    }
+    let NewObject = {
+      Location:req.body.location,
+      Description:req.body.description,
+      GitHub:req.body.github,
+      Instagram:req.body.instagram,
+      LinkedIn:req.body.linkedin,
+    };
+    if(req.file) NewObject['image'] = result.url;
+    let fid = req.body.id;
+    await User29.findOneAndUpdate({id:fid},NewObject);
+    res.status(200).json("User Updated");
+  } catch(err){
+    console.error(err.message);
+  }
+});
