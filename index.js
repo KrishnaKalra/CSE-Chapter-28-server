@@ -15,8 +15,8 @@ app.use(bodyParser.json({limit: '150mb'}));
 app.use(bodyParser.urlencoded({limit: '150mb', extended: true,parameterLimit:50000}));
 app.use(express.json());
 const port=3000;
-const password='qe2D!nSmLqCnEPS';
-mongoose.connect('mongodb+srv://KrishnaKalra:'+password+'@cluster0.gynsm.mongodb.net/Batches');
+const password='';
+mongoose.connect('process.env.MONGO_URI');
 const db=mongoose.connection;
 db.once('open',()=>{ 
     console.log("mongoDB connected"); 
