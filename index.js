@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();   
 import express from "express";
 import bodyParser from "body-parser";
 import cors from 'cors';
@@ -5,7 +7,7 @@ import mongoose from "mongoose";
 import { uploadOnCloudinary } from "./utils/cloudinary.js";
 import {upload } from "./middleware/multer.middleware.js";
 import getDataUri from "./utils/dataUri.js";
-import env from 'dotenv';
+
 
 const app=express();
 app.use(cors({
@@ -17,8 +19,11 @@ app.use(bodyParser.json({limit: '150mb'}));
 app.use(bodyParser.urlencoded({limit: '150mb', extended: true,parameterLimit:50000}));
 app.use(express.json());
 const port=3000;
-const password='';
-mongoose.connect(process.env.MONGO_URI);
+
+
+console.log("Connecting to:", process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI);
+
 const db=mongoose.connection;
 db.once('open',()=>{ 
     console.log("mongoDB connected"); 
