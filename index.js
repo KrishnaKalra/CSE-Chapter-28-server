@@ -22,7 +22,7 @@ const port=3000;
 
 
 console.log("Connecting to:", process.env.MONGODB_URI);
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGO_URI);
 
 const db=mongoose.connection;
 db.once('open',()=>{ 
