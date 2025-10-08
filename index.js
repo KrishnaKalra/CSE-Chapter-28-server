@@ -21,7 +21,7 @@ app.use(express.json());
 const port=3000;
 
 
-console.log("Connecting to:", process.env.MONGODB_URI);
+console.log("Connecting to:", process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI);
 
 const db=mongoose.connection;
@@ -90,6 +90,7 @@ app.post('/api/2027/profile',upload.single('images'),async(req,res)=>{
         }
         console.log(result);
         let NewObject={
+            name: req.body.name, 
             Location:req.body.location,
             Description:req.body.description,
             GitHub:req.body.github,
@@ -156,6 +157,7 @@ app.post('/api/2026/profile',upload.single('images'),async(req,res)=>{
         }
         //console.log(result.url);
         let NewObject={
+            name: req.body.name, 
             Location:req.body.location,
             Description:req.body.description,
             GitHub:req.body.github,
@@ -225,6 +227,7 @@ app.post('/api/2028/profile',upload.single('images'),async(req,res)=>{
             result= await uploadOnCloudinary(fileUri,req.body.id);}
         //console.log(result.url);
         let NewObject={
+            name: req.body.name, 
             Location:req.body.location,
             Description:req.body.description,
             GitHub:req.body.github,
@@ -289,6 +292,7 @@ app.post('/api/2029/profile', upload.single('images'), async (req,res)=>{
       result = await uploadOnCloudinary(fileUri, req.body.id);
     }
     let NewObject = {
+      name: req.body.name, 
       Location:req.body.location,
       Description:req.body.description,
       GitHub:req.body.github,
